@@ -5,7 +5,19 @@ interface hangmanProps {
 export function Hangman({ errors }: hangmanProps) {
   return (
     <div style={{ width: "400px", position: "relative", margin: "auto" }}>
-      {errors == 1 && (
+      {errors > 1 && (
+        <div
+          style={{
+            width: "10px",
+            height: "150px",
+            backgroundColor: "black",
+            position: "absolute",
+            top: "110px",
+            right: "5px",
+          }}
+        ></div>
+      )}
+      {errors > 0 && (
         <div
           style={{
             width: "50px",

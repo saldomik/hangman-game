@@ -15,7 +15,6 @@ function App() {
         indices.push(idx);
         idx = wordToGuess.indexOf(value.toLowerCase(), idx + 1);
       }
-      console.log(indices);
 
       setGuessingWord((arr) => {
         indices.forEach((item) => {
@@ -40,22 +39,22 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log(JSON.stringify(guessingWord));
-    console.log(JSON.stringify(wordToGuess));
     if (
       guessingWord.every((item) => wordToGuess.includes(item)) &&
       wordToGuess.every((item) => guessingWord.includes(item))
     )
       setResult("Hai vinto!");
     else setResult("");
-  }, [guessingWord]);
+
+    if (errors === 6) setResult("Hai perso!");
+  }, [guessingWord, wordToGuess, errors]);
 
   return (
     <div className="App">
       <Result value={result} />
       <Hangman errors={errors} />
-      <p>{wordToGuess}</p>
-      <p>{errors}</p>
+      {/*       <p>{wordToGuess}</p>
+      <p>{errors}</p> */}
       <Word value={guessingWord} />
       <Keyboard onKeyboardPress={handleKeyboardPress} />
     </div>
