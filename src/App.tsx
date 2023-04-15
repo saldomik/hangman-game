@@ -11,12 +11,15 @@ function App() {
   const [wordToGuess, setwordToGuess] = useState<string[]>([]);
   const [result, setResult] = useState<string>('');
   const [errors, setErrors] = useState<number>(0);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
     const index = Math.floor(Math.random() * 2465);
     const word = words.data[index];
     setwordToGuess(word.split(''));
     setGuessingWord(Array(word.length).fill(() => ''));
+
+    window.addEventListener('resize', () => {});
   }, []);
 
   useEffect(() => {
@@ -53,7 +56,7 @@ function App() {
   return (
     <div className="App">
       <Result value={result} />
-      <Hangman errors={errors} />
+      <Hangman errors={errors} isMobile={isMobile} />
       <p>{wordToGuess}</p>
       <p>{errors}</p>
       <Word value={guessingWord} />
